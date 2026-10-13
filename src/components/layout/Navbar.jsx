@@ -17,13 +17,14 @@ export default function Navbar({ onOpenSearch }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const isHome = location.pathname === '/';
+  const isSpecialHero = location.pathname === '/' || location.pathname === '/blog';
 
   const navLinks = [
-    { name: 'Főoldal', path: '/' },
-    { name: 'Webshop / Termékek', path: '/shop' },
-    { name: 'Miért a Rostok?', path: '/#story' },
-    { name: 'Technikai Audit & Terv', path: '/audit', badge: 'Új' },
+    { name: 'Home', path: '/' },
+    { name: 'Shop', path: '/shop' },
+    { name: 'Blog', path: '/blog' },
+    { name: 'About', path: '/#story' },
+    { name: 'Audit', path: '/audit', badge: 'New' },
   ];
 
   const isActive = (path) => {
@@ -31,7 +32,7 @@ export default function Navbar({ onOpenSearch }) {
     return location.pathname.startsWith(path);
   };
 
-  if (isHome) {
+  if (isSpecialHero) {
     return null;
   }
 

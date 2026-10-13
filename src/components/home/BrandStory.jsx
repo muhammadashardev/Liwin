@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Star, ChevronRight } from 'lucide-react';
-import { ArrowRight } from 'lucide-react';
+import { Star, ChevronRight, ArrowRight } from 'lucide-react';
 
 const testimonial = {
   text: '"These fiber bars are amazing! Tasty, healthy and keep me full for hours. I love them!"',
@@ -12,75 +11,78 @@ const testimonial = {
 
 export default function BrandStorySection() {
   return (
-    <section className="py-0 overflow-hidden">
-      {/* Full-bleed panoramic section */}
-      <div className="relative min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] flex items-center">
+    <section className="py-14 sm:py-20 bg-[#FAF8F5] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
 
-        {/* Background lifestyle image */}
-        <img
-          src="/03_lifestyle_background.jpg"
-          alt="Active lifestyle"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-        />
-        {/* Dark gradient overlay */}
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, rgba(5,20,12,0.75) 0%, rgba(5,20,12,0.55) 50%, rgba(5,20,12,0.15) 100%)' }} />
+          {/* Left: Lifestyle Photo */}
+          <div className="lg:col-span-4 flex justify-center lg:justify-start">
+            <div className="relative w-full max-w-[340px] sm:max-w-[380px] aspect-[4/3] sm:aspect-[4/3] lg:aspect-[4/4] rounded-3xl overflow-hidden shadow-lg border border-stone-200/60">
+              <img
+                src="/02_brand_story_lifestyle.jpg"
+                alt="Active healthy lifestyle with Liwin"
+                className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+          </div>
 
-        {/* Content row */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-
-            {/* Left: brand story text */}
-            <div className="space-y-4">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400 block">OUR STORY</span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight">
-                More Than Just a Snack
-              </h2>
-              <p className="text-stone-200 text-sm sm:text-[15px] leading-relaxed max-w-md">
-                At LIWIN, we're passionate about creating delicious, nutritious snacks that fit your lifestyle. Our fiber-rich products are made with natural ingredients, so you can feel good about every bite.
-              </p>
-              <Link to="/shop"
-                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full font-bold text-sm bg-white text-stone-900 hover:bg-[#7ed957] hover:text-[#071a10] transition-all duration-300 shadow-md"
+          {/* Center: Story Text */}
+          <div className="lg:col-span-5 space-y-4 text-left">
+            <span className="text-xs sm:text-[13px] font-black uppercase tracking-[0.22em] text-[#2d7a3e] block">
+              OUR STORY
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black text-stone-900 leading-tight tracking-tight">
+              More Than Just a Snack
+            </h2>
+            <p className="text-stone-600 text-sm sm:text-[15px] leading-relaxed">
+              At LIWIN, we're passionate about creating delicious, nutritious snacks that fit your lifestyle. Our fiber-rich products are made with natural ingredients, so you can feel good about every bite.
+            </p>
+            <div className="pt-2">
+              <Link
+                to="/#story"
+                className="inline-flex items-center gap-2.5 px-7 py-3 rounded-full font-extrabold text-xs sm:text-sm bg-[#132a1e] hover:bg-[#2d7a3e] text-white transition-all duration-300 shadow-md hover:shadow-lg"
               >
                 <span>Learn More</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
+          </div>
 
-            {/* Right: Testimonial card */}
-            <div className="flex justify-start lg:justify-end">
-              <div className="bg-[#0d2e1c]/90 backdrop-blur-md border border-emerald-700/30 rounded-2xl sm:rounded-3xl p-5 sm:p-6 max-w-[320px] w-full shadow-2xl">
-                {/* Quote icon */}
-                <div className="text-emerald-400 text-4xl font-serif leading-none mb-2 select-none">"</div>
+          {/* Right: Testimonial Card */}
+          <div className="lg:col-span-3 flex justify-center lg:justify-end">
+            <div className="bg-[#0c2619] border border-emerald-800/40 rounded-3xl p-6 sm:p-7 max-w-[320px] w-full shadow-xl text-white space-y-4">
+              {/* Quote mark */}
+              <div className="text-[#84cc16] text-3xl font-serif leading-none select-none">“</div>
 
-                <p className="text-stone-100 text-sm leading-relaxed mb-4 italic">
-                  {testimonial.text}
-                </p>
+              <p className="text-stone-200 text-xs sm:text-[13px] leading-relaxed italic">
+                {testimonial.text}
+              </p>
 
-                {/* Reviewer */}
-                <div className="flex items-center justify-between pt-3 border-t border-emerald-800/50">
-                  <div className="flex items-center gap-3">
-                    <img
-                      src={testimonial.avatar}
-                      alt={testimonial.name}
-                      className="w-9 h-9 rounded-full object-cover border-2 border-emerald-600/60"
-                    />
-                    <div>
-                      <p className="text-white font-bold text-sm">{testimonial.name}</p>
-                      <div className="flex gap-0.5 mt-0.5">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} className="w-3 h-3 text-amber-400 fill-amber-400" />
-                        ))}
-                      </div>
+              {/* Reviewer info */}
+              <div className="flex items-center justify-between pt-3 border-t border-emerald-900/60">
+                <div className="flex items-center gap-2.5">
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    className="w-8 h-8 rounded-full object-cover border border-[#84cc16]/60"
+                  />
+                  <div>
+                    <p className="text-white font-bold text-xs">{testimonial.name}</p>
+                    <div className="flex gap-0.5 mt-0.5">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="w-2.5 h-2.5 text-amber-400 fill-amber-400" />
+                      ))}
                     </div>
                   </div>
-                  <button className="w-8 h-8 rounded-full bg-emerald-600/30 hover:bg-emerald-600 flex items-center justify-center text-emerald-300 hover:text-white transition-colors">
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
+                </div>
+
+                <div className="w-6 h-6 rounded-full bg-emerald-950/80 flex items-center justify-center text-[#84cc16]">
+                  <ChevronRight className="w-3.5 h-3.5" />
                 </div>
               </div>
             </div>
-
           </div>
+
         </div>
       </div>
     </section>
