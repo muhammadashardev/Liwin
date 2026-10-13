@@ -4,12 +4,29 @@
   html {
     scroll-behavior: smooth;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+
+  body {
+    overflow-x: hidden;
+    min-width: 320px;
+  }
+
+  /* Prevent any element from causing horizontal overflow */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+
+  img, video, svg {
+    max-width: 100%;
+    height: auto;
   }
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #f1ede6;
@@ -20,6 +37,15 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #2d6a4f;
+}
+
+/* Hide scrollbar on overflow-x scrollable containers */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 .font-script {
@@ -34,15 +60,49 @@
   font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
 }
 
+/* Animations */
 @keyframes floatGentle {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
 }
 
-.animate-float-gentle {
-  animation: floatGentle 4s ease-in-out infinite;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.animate-float-gentle  { animation: floatGentle 4s ease-in-out infinite; }
+.animate-fadeIn        { animation: fadeIn 0.35s ease both; }
+.animate-scaleIn       { animation: scaleIn 0.3s cubic-bezier(0.175,0.885,0.32,1.275) both; }
+.animate-slideInRight  { animation: slideInRight 0.35s ease both; }
+
+/* App frame — max width so it looks great on all devices */
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Responsive table helper */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Mobile touch improvements */
+@media (max-width: 640px) {
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
 }

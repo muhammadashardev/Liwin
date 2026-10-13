@@ -3,16 +3,21 @@ import { Link } from 'react-router-dom';
 import { CheckCircle2, ShoppingCart, ArrowRight } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 
-const featuredProducts = [
+const featuredList = [
   {
     id: 'pistachio-almond',
     name: 'Fiber Bar Pistachio & Almond',
     tagline: 'Crunchy. Nutty. Naturally Good.',
     price: 2.99,
     originalPrice: 3.99,
-    benefits: ['High in Fiber', 'No Added Sugar', 'Gluten Free', 'Rich in Natural Ingredients'],
-    image: '/01_featured_product_visual.jpg',
-    accent: '#2d7a3e',
+    benefits: [
+      'High in Fiber',
+      'No Added Sugar',
+      'Gluten Free',
+      'Rich in Natural Ingredients',
+    ],
+    image: '/crops/clean_featured_pistachio.jpg',
+    weight: '40g',
   },
   {
     id: 'chocolate',
@@ -20,9 +25,14 @@ const featuredProducts = [
     tagline: 'Rich Dark Cocoa. Pure Indulgence.',
     price: 2.99,
     originalPrice: 3.99,
-    benefits: ['High in Fiber', 'No Added Sugar', 'Gluten Free', 'Premium Dark Cocoa'],
-    image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&auto=format&fit=crop&q=80',
-    accent: '#7b3f1e',
+    benefits: [
+      'High in Fiber',
+      'No Added Sugar',
+      'Gluten Free',
+      'Rich in Natural Ingredients',
+    ],
+    image: '/crops/clean_featured_pistachio.jpg',
+    weight: '40g',
   },
   {
     id: 'cranberry-almond',
@@ -30,105 +40,149 @@ const featuredProducts = [
     tagline: 'Tangy. Sweet. Antioxidant Boost.',
     price: 2.99,
     originalPrice: 3.99,
-    benefits: ['High in Fiber', 'No Added Sugar', 'Gluten Free', 'Superfruit Cranberries'],
-    image: 'https://images.unsplash.com/photo-1622484216843-c053359d3cfd?w=600&auto=format&fit=crop&q=80',
-    accent: '#a62060',
+    benefits: [
+      'High in Fiber',
+      'No Added Sugar',
+      'Gluten Free',
+      'Rich in Natural Ingredients',
+    ],
+    image: '/crops/clean_featured_pistachio.jpg',
+    weight: '40g',
+  },
+  {
+    id: 'blueberry-almond',
+    name: 'Fiber Bar Blueberry & Almond',
+    tagline: 'Sweet Wild Berry. Lasting Vitality.',
+    price: 2.99,
+    originalPrice: 3.99,
+    benefits: [
+      'High in Fiber',
+      'No Added Sugar',
+      'Gluten Free',
+      'Rich in Natural Ingredients',
+    ],
+    image: '/crops/clean_featured_pistachio.jpg',
+    weight: '40g',
   },
 ];
 
 export default function FeaturedProductSection() {
   const [activeIdx, setActiveIdx] = useState(0);
   const { addToCart } = useCart();
-  const product = featuredProducts[activeIdx];
+  const product = featuredList[activeIdx];
 
   return (
-    <section className="py-4 px-4 sm:px-6 lg:px-8">
+    <section className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-[#FAF8F5]">
       <div className="max-w-7xl mx-auto">
         <div
-          className="relative rounded-2xl sm:rounded-3xl overflow-hidden"
-          style={{ background: 'linear-gradient(135deg, #0a2c18 0%, #0f3d22 50%, #173d26 100%)' }}
+          className="relative rounded-3xl overflow-hidden shadow-2xl border border-emerald-950/40"
+          style={{
+            background: 'linear-gradient(135deg, #092316 0%, #0d2a1b 50%, #123523 100%)',
+          }}
         >
-          {/* Subtle grain texture overlay */}
-          <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")', backgroundSize: '200px' }} />
+          {/* Ambient light glow */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-lime-500/10 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-0 items-stretch min-h-[420px] sm:min-h-[480px]">
-
-            {/* Left: Product image */}
-            <div className="relative flex items-center justify-center p-8 sm:p-12 lg:p-16">
-              {/* Green radial glow */}
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-64 h-64 rounded-full opacity-20" style={{ background: 'radial-gradient(circle, #4ade80 0%, transparent 70%)' }} />
-              </div>
+          {/* 2-Column Split: Image fills entire left side properly */}
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 min-h-[460px] lg:min-h-[520px] items-stretch">
+            
+            {/* ── LEFT SIDE: Full-width / full-height image container ── */}
+            <div className="lg:col-span-6 relative flex items-center justify-center min-h-[360px] sm:min-h-[420px] lg:min-h-full overflow-hidden bg-[#071c12]">
               <img
-                key={activeIdx}
                 src={product.image}
                 alt={product.name}
-                className="relative z-10 w-full max-w-[280px] sm:max-w-[320px] h-auto object-contain drop-shadow-2xl transition-all duration-500"
-                style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.6))', animation: 'floatHero 4s ease-in-out infinite' }}
+                className="w-full h-full object-cover object-center transition-all duration-700"
+                style={{
+                  filter: 'drop-shadow(0 15px 35px rgba(0,0,0,0.4))',
+                }}
               />
+              {/* Soft overlay gradient on right edge of image for seamless blend into text area */}
+              <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent to-[#0d2a1b]/60 pointer-events-none" />
             </div>
 
-            {/* Right: Product info */}
-            <div className="flex flex-col justify-center p-6 sm:p-10 lg:p-12">
-              {/* Label */}
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400 mb-3">FEATURED PRODUCT</span>
+            {/* ── RIGHT SIDE: Product details & Add to Cart ── */}
+            <div className="lg:col-span-6 p-6 sm:p-10 lg:p-14 flex flex-col justify-center text-white space-y-4 sm:space-y-5">
+              
+              {/* Category / Badge */}
+              <div>
+                <span className="text-xs sm:text-[13px] font-black uppercase tracking-[0.22em] text-[#84cc16] block">
+                  FEATURED PRODUCT
+                </span>
+              </div>
 
-              {/* Name & Tagline */}
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-white leading-snug mb-1">{product.name}</h2>
-              <p className="text-stone-400 text-sm mb-5">{product.tagline}</p>
+              {/* Product Title & Tagline */}
+              <div>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight tracking-tight">
+                  {product.name}
+                </h2>
+                <p className="text-stone-300 text-sm sm:text-base font-normal mt-1.5">
+                  {product.tagline}
+                </p>
+              </div>
 
-              {/* Benefits */}
-              <ul className="space-y-2 mb-6">
+              {/* 4 Benefit Checkmarks */}
+              <ul className="space-y-2.5 py-2">
                 {product.benefits.map((b) => (
-                  <li key={b} className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#6ec94f] shrink-0" />
-                    <span className="text-stone-200 text-sm font-medium">{b}</span>
+                  <li key={b} className="flex items-center gap-3">
+                    <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#84cc16] shrink-0" />
+                    <span className="text-stone-200 text-xs sm:text-sm font-semibold tracking-wide">
+                      {b}
+                    </span>
                   </li>
                 ))}
               </ul>
 
-              {/* Price */}
-              <div className="flex items-baseline gap-3 mb-6">
-                <span className="text-3xl font-black text-white">${product.price.toFixed(2)}</span>
-                <span className="text-stone-500 line-through text-base font-semibold">${product.originalPrice.toFixed(2)}</span>
+              {/* Price row */}
+              <div className="flex items-baseline gap-3 pt-1">
+                <span className="text-3xl sm:text-4xl font-black text-white">
+                  ${product.price.toFixed(2)}
+                </span>
+                <span className="text-stone-400 line-through text-base sm:text-lg font-bold">
+                  ${product.originalPrice.toFixed(2)}
+                </span>
               </div>
 
-              {/* Actions */}
-              <div className="flex flex-wrap items-center gap-3">
+              {/* CTA Buttons */}
+              <div className="pt-2 flex flex-wrap items-center gap-3 sm:gap-4">
                 <button
-                  onClick={() => addToCart({ id: product.id, name: product.name, price: product.price, image: product.image, weight: '40g' })}
-                  className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full font-bold text-sm text-[#071a10] transition-all hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0"
-                  style={{ background: '#7ed957', boxShadow: '0 8px 24px rgba(126,217,87,0.3)' }}
+                  onClick={() => addToCart(product, 1)}
+                  className="bg-[#84cc16] hover:bg-[#72b012] text-stone-900 font-extrabold px-8 py-3.5 rounded-full text-xs sm:text-sm flex items-center gap-2 shadow-lg transition-all hover:shadow-xl hover:translate-x-0.5"
                 >
-                  <ShoppingCart className="w-4 h-4" />
+                  <ShoppingCart className="w-4 h-4 stroke-[2.4]" />
                   <span>Add to Cart</span>
                 </button>
-                <Link to={`/product/${product.id}`}
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-full font-bold text-sm text-white border border-white/20 hover:border-[#6ec94f]/60 hover:bg-white/5 transition-all">
+
+                <Link
+                  to={`/product/${product.id}`}
+                  className="w-11 h-11 rounded-full border border-white/20 hover:border-[#84cc16] hover:text-[#84cc16] flex items-center justify-center text-white transition-all"
+                  aria-label="View product details"
+                >
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
+
+              {/* Slider dots */}
+              <div className="pt-4 flex items-center gap-2">
+                {featuredList.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveIdx(idx)}
+                    aria-label={`Featured slide ${idx + 1}`}
+                    className={`transition-all duration-300 rounded-full ${
+                      activeIdx === idx
+                        ? 'w-6 h-2 bg-[#84cc16]'
+                        : 'w-2 h-2 bg-white/30 hover:bg-white/60'
+                    }`}
+                  />
+                ))}
+              </div>
+
             </div>
 
           </div>
-
-          {/* Pagination dots */}
-          <div className="flex justify-center pb-5 pt-1 gap-2.5">
-            {featuredProducts.map((_, idx) => (
-              <button key={idx} onClick={() => setActiveIdx(idx)} aria-label={`Product ${idx + 1}`}
-                className={`rounded-full transition-all duration-300 focus:outline-none ${activeIdx === idx ? 'w-6 h-2.5 bg-[#7ed957]' : 'w-2.5 h-2.5 bg-white/25 hover:bg-white/50'}`} />
-            ))}
-          </div>
-
         </div>
       </div>
-
-      <style>{`
-        @keyframes floatHero {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-        }
-      `}</style>
     </section>
   );
 }
